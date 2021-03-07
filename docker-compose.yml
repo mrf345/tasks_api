@@ -1,0 +1,38 @@
+version: "3.7"
+
+services:
+  web:
+    build: .
+    environment:
+      DATABASE_DB: "tasks_api"
+      DATABASE_USER: "root"
+      DATABASE_PASSWORD: "root"
+      DATABASE_HOST: "database"
+      DATABASE_PORT: 3306
+      BROKER_URL: "amqp://guest:guest@rabbitmq:5672//"
+      PORT: 8000
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/app
+    depends_on:
+      - database
+      - rabbitmq
+    command: sh entry_point.sh
+
+  database:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tasks_api
+    volumes:
+      - db_data:/var/lib/mysql
+
+  rabbitmq:
+    image: rabbitmq:3.8
+    ports:
+      - "5672:5672"
+
+volumes:
+  db_data:
