@@ -1,4 +1,10 @@
+docker:=$(shell docker ps -q --no-trunc | grep $(shell docker-compose ps -q web))
+
+ifndef $(docker)
+$(shell pip install -r requirements.txt)
+else
 service=docker-compose exec web
+endif
 
 lint:
 	$(service) black --check .

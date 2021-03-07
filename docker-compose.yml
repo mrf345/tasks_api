@@ -4,6 +4,7 @@ services:
   web:
     build: .
     environment:
+      DOCKER: true
       DATABASE_DB: "tasks_api"
       DATABASE_USER: "root"
       DATABASE_PASSWORD: "root"
