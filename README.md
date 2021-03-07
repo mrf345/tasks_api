@@ -1,4 +1,4 @@
-# tasks_api
+# tasks_api [![status](https://github.com/mrf345/tasks_api/workflows/CI/badge.svg)](https://github.com/mrf345/tasks_api/actions/workflows/main.yml) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 ### Setup
 
