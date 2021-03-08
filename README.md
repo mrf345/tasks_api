@@ -2,8 +2,9 @@
 
 ### Setup
 
+- Clone or [download](https://github.com/mrf345/tasks_api/archive/master.zip) this repository
 - Make sure you have [`docker`](https://www.docker.com/get-started) and [`docker-compose`](https://docs.docker.com/compose/install/) installed
-- from within the project run `docker-compose up` and wait for a while, then checkout [`http://0.0.0.0:8000`](http://0.0.0.0:8000)
+- From within the project directory run `docker-compose up` and wait for a while, then checkout [`http://0.0.0.0:8000`](http://0.0.0.0:8000)
 
 ### Usage
 
