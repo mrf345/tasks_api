@@ -82,6 +82,7 @@ class TestTaskViewset(TestCase):
         resp = self.view.as_view({"get": "list"})(req)
         serialized = OrderedDict([("name", task.name), ("status", task.status)])
 
+        self.assertEqual(resp.status_code, HTTPStatus.OK)
         self.assertEqual(resp.data, [serialized])
 
     def test_retrieve_task(self):
@@ -90,6 +91,7 @@ class TestTaskViewset(TestCase):
         resp = self.view.as_view({"get": "retrieve"})(req, name=self.name)
         serialized = {"name": task.name, "status": task.status}
 
+        self.assertEqual(resp.status_code, HTTPStatus.OK)
         self.assertEqual(resp.data, serialized)
 
 
@@ -104,10 +106,12 @@ class TestTasks(TestCase):
 
     def test_generate_random_number(self):
         task = TaskFactory(name=self.name)
-        prev_status = task.status
+        prev_status, prev_result = task.status, task.result
         generate_random_number(task_name=self.name)
         task = Task.objects.get(pk=task.pk)
 
         self.mock_time.sleep.assert_called_once_with(100)
         self.assertEqual(prev_status, TaskStatusChoices.IN_PROGRESS)
         self.assertEqual(task.status, TaskStatusChoices.COMPLETE)
+        self.assertIsNone(prev_result)
+        self.assertIsInstance(task.result, int)
